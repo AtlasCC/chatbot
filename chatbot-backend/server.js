@@ -3,16 +3,14 @@ const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Tilføj GET-rute for root
 app.get('/', (req, res) => {
     res.send('Velkommen til Chatbot-serveren!');
 });
 
-// POST-rute til chatbotten
 app.post('/chat', async (req, res) => {
     const { message } = req.body;
 
@@ -34,6 +32,7 @@ app.post('/chat', async (req, res) => {
 
         res.json({ reply: response.data.choices[0].message.content });
     } catch (error) {
+        console.error('Fejl med OpenAI API:', error); // Log fejl
         res.status(500).send('Fejl med OpenAI API');
     }
 });
