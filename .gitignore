@@ -1,1 +1,3 @@
-chatbot-backend/chatbot.env
+# .gitignore
+.env
+chatbot-backend/.env
